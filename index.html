@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No soy un robot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset y fuente base */
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+    /* Fondo */
+    body {
+      background: url('img/air.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+    /* Contenedor principal */
+    .container {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      padding: 20px;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+    }
+    /* Título */
+    h1 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    /* Contenedor "captchat" para la imagen y el check */
+    .captchat {
+      position: relative;
+      margin-top: 15px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    /* Imagen que se ajusta al contenedor */
+    .captchat img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    /* Cuadro pequeño check */
+.draggable {
+  width: 22px;
+  height: 23px;
+  background-color: transparent;
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Pseudo-elemento para mostrar el check mark */
+.draggable.checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(29, 4, 225);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Estado activo del check (se mantiene transparente) */
+.draggable.checked {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 480px) {
+  .draggable {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+    /* Loader: spinner circular */
+    .loader {
+      border: 4px solid #f3f3f3; /* Color claro */
+      border-top: 4px solid #3498db; /* Azul */
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin: 15px auto;
+      display: none;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Botón Continuar centrado */
+    #continueBtn {
+      margin: 15px auto 0;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(45deg, #007BFF, #00C6FF);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: none;
+    }
+    #continueBtn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 8px rgba(0, 123, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>No soy un robot</h1>
+    <div class="captchat">
+      <img src="img/cap.jpg" alt="Imagen de Captchat">
+      <div class="draggable" id="check"></div>
+    </div>
+    <div class="loader" id="loader"></div>
+    <button id="continueBtn">Continuar</button>
+  </div>
+  <script>
+    const check = document.getElementById('check');
+    const loader = document.getElementById('loader');
+    const continueBtn = document.getElementById('continueBtn');
+
+    check.addEventListener('click', () => {
+      // Alterna el estado de check
+      check.classList.toggle('checked');
+      if (check.classList.contains('checked')) {
+        // Al marcar el check: ocultamos el botón, mostramos el loader
+        continueBtn.style.display = 'none';
+        loader.style.display = 'block';
+        // Simulamos un tiempo de carga de 2 segundos, luego ocultamos el loader y mostramos el botón
+        setTimeout(() => {
+          loader.style.display = 'none';
+          continueBtn.style.display = 'block';
+        }, 2000);
+      } else {
+        // Si se desmarca el check, ocultamos loader y botón
+        loader.style.display = 'none';
+        continueBtn.style.display = 'none';
+      }
+    });
+
+    continueBtn.addEventListener('click', () => {
+      // Redirige a otra página (cambia la URL según necesites)
+      window.location.href = "otraPagina.html";
+    });
+  </script> 
+</body>
+</html>
